@@ -30,7 +30,7 @@ runs:
   using: composite
   steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup cache extensions
       if: ${{ inputs.extensions != '' }}
@@ -43,7 +43,7 @@ runs:
 
     - name: Cache extensions
       if: ${{ inputs.extensions != '' }}
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ steps.extensions-cache.outputs.dir }}
         key: ${{ steps.extensions-cache.outputs.key }}
@@ -69,7 +69,7 @@ runs:
       run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
     - name: Cache dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ${{ steps.composer-cache.outputs.dir }}
         key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
@@ -81,4 +81,4 @@ runs:
 
     - name: Get Changed Files
       id: files
-      uses: masesgroup/retrieve-changed-files@v2
+      uses: masesgroup/retrieve-changed-files@v3
